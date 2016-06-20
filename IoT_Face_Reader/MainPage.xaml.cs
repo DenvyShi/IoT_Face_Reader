@@ -26,5 +26,10 @@ namespace IoT_Face_Reader
         {
             this.InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
