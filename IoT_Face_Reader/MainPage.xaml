@@ -7,8 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Black">
-        <Button x:Name="button" Content="Button_Click" HorizontalAlignment="Left" Height="99" Margin="10,659,0,0" VerticalAlignment="Top" Width="106" Background="#334466FD" Foreground="White" Click="button_Click"/>
-
+    <Grid Background="#FF5B5B5B">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="HelloMessage" Text="Hello, World!" Margin="10" IsReadOnly="True"/>
+            <Button x:Name="ClickMe" Content="Click Me!"  Margin="10" HorizontalAlignment="Center" Click="ClickMe_Click"/>
+        </StackPanel>
+        <CaptureElement x:Name="previewElement" Width="200" Height="200" HorizontalAlignment="Left" Visibility="Visible" Margin="22,56,0,512"/>
+        <Image x:Name="captureImage" Width="200" Height="200" Visibility="Visible" Margin="22,388,802,180"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="300" Margin="434,27,0,0" TextWrapping="Wrap" Text="Face Processing&#xD;&#xA;&#xD;&#xA;Age:&#xD;&#xA;&#xD;&#xA;Gender:&#xD;&#xA;&#xD;&#xA;Smile:&#xD;&#xA;&#xD;&#xA;Glasses:&#xD;&#xA;&#xD;&#xA;FacialHair:" VerticalAlignment="Top" Width="141" TextAlignment="Right" FontSize="14"/>
+        <TextBox x:Name="ageBox" HorizontalAlignment="Left" Height="16" Margin="575,68,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="14"/>
+        <TextBox x:Name="genderBox" HorizontalAlignment="Left" Height="16" Margin="575,105,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="14"/>
+        <TextBox x:Name="smileBox" HorizontalAlignment="Left" Height="16" Margin="575,137,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="14"/>
+        <TextBox x:Name="glassesBox" HorizontalAlignment="Left" Height="16" Margin="575,174,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="14"/>
+        <TextBox x:Name="facialHairBox" HorizontalAlignment="Left" Height="16" Margin="575,211,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="14"/>
+        <TextBox x:Name="statusBox" HorizontalAlignment="Left" Height="51" Margin="123,613,0,0" TextWrapping="Wrap" Text="status info here" VerticalAlignment="Top" Width="422"/>
+        <Button x:Name="videoInit" Content="videoInit" HorizontalAlignment="Left" Height="58" Margin="698,461,0,0" VerticalAlignment="Top" Width="153" Background="#33FFFFFF"/>
+        <Button x:Name="closeCamera" Content="closeCamera" HorizontalAlignment="Left" Height="58" Margin="698,700,0,0" VerticalAlignment="Top" Width="153" Background="#33FFFFFF"/>
+        <Button x:Name="takePhoto" Content="takePhoto" HorizontalAlignment="Left" Height="58" Margin="698,553,0,0" VerticalAlignment="Top" Width="153" Background="#33FFFFFF"/>
     </Grid>
 </Page>
