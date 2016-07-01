@@ -89,12 +89,25 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="EmotionApiClient\build_nuget_package.cmd" />
+    <None Include="EmotionApiClient\Microsoft.ProjectOxford.Emotion.nuspec" />
+    <None Include="EmotionApiClient\packages.config" />
+    <None Include="FaceApiClient\ClassDiagram1.cd" />
+    <None Include="FaceApiClient\project.json" />
+    <None Include="FaceApiClient\project.lock.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmotionApiClient\EmotionServiceClient.cs" />
+    <Compile Include="EmotionApiClient\IEmotionServiceClient.cs" />
+    <Compile Include="FaceApiClient\ClientError.cs" />
+    <Compile Include="FaceApiClient\ClientException.cs" />
+    <Compile Include="FaceApiClient\FaceServiceClient.cs" />
+    <Compile Include="FaceApiClient\IFaceServiceClient.cs" />
+    <Compile Include="FaceApiClient\RequestModels.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +120,9 @@
     <None Include="IoT_Face_Reader_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmotionApiClient\ClientLibrary.sln" />
+    <Content Include="EmotionApiClient\Microsoft.ProjectOxford.Emotion.csproj" />
+    <Content Include="FaceApiClient\FaceApiClient.csproj" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
