@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Microsoft.Azure.Management.Sql": "0.47.0-prerelease",
     "Microsoft.Net.Http": "2.2.29",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Microsoft.ProjectOxford.Emotion": "1.0.310",

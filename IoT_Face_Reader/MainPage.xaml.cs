@@ -14,7 +14,10 @@ using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Face.Contract;
 
-// Tyler's face-IoT project
+// Win10 IoT project: face/emotion recognition using a webcam & msft APIs
+// some code copied from msft sample code projects (e.g., webcam & facial recogn. doorbell)
+// coming soon: GPS support & cloud connectivity
+// github.com/yostx038
 
 
 namespace IoT_Face_Reader
@@ -22,8 +25,6 @@ namespace IoT_Face_Reader
 
     public sealed partial class MainPage : Page
     {
-        // TAY's Face A free key from MSFT Cog Svcs.
-        // private readonly IFaceServiceClient faceServiceClient = new FaceServiceClient("9725d03742394560be3ff295e1e435a2");
 
         private MediaCapture mediaCapture;
         private StorageFile photoFile;
@@ -96,27 +97,7 @@ namespace IoT_Face_Reader
 
         }
 
-
-
-
-        private async void Cleanup()
-        {
-            if (mediaCapture != null)
-            {
-                // Cleanup MediaCapture object
-                if (isPreviewing)
-                {
-                    await mediaCapture.StopPreviewAsync();
-                    captureImage.Source = null;
-                    isPreviewing = false;
-                }
-                mediaCapture.Dispose();
-                mediaCapture = null;
-            }
-            SetInitButtonVisibility(Action.ENABLE);
-        }
-
-
+        // initialize webcam, set up live preview
         public async void initVideo_Click(object sender, RoutedEventArgs e)
         {
 
@@ -162,15 +143,7 @@ namespace IoT_Face_Reader
             }
         }
 
-        private void cleanup_Click(object sender, RoutedEventArgs e)
-        {
-            SetInitButtonVisibility(Action.DISABLE);
-            Cleanup();
-        }
-
-
-
-
+        // method to take a still image, send to APIs, and display result
         public async void takePhoto_Click(object sender, RoutedEventArgs e)
         {
 
@@ -226,7 +199,7 @@ namespace IoT_Face_Reader
 
         }
 
-
+        // method to draw marker on the face associated with currently displayed attributes
         public async void displayImage()
         {
             // displays the image
@@ -283,30 +256,30 @@ namespace IoT_Face_Reader
 
         }
 
-
-
+        // method to populate face/emotion attribute fields
         public async void displayFaceInfo()
         {
             // first draw a box on the face we're looking at
-            ageBox.Text = faceResult[currentFace].FaceAttributes.Age.ToString();
+            ageBox.Text = faceResult[currentFace].FaceAttributes.Age.ToString("F3");
             genderBox.Text = faceResult[currentFace].FaceAttributes.Gender.ToString();
-            smileBox.Text = faceResult[currentFace].FaceAttributes.Smile.ToString();
+            smileBox.Text = faceResult[currentFace].FaceAttributes.Smile.ToString("F3");
             glassesBox.Text = faceResult[currentFace].FaceAttributes.Glasses.ToString();
 
-            angerBox.Text = emotionResult[currentFace].Scores.Anger.ToString();
-            contemptBox.Text = emotionResult[currentFace].Scores.Contempt.ToString();
-            disgustBox.Text = emotionResult[currentFace].Scores.Disgust.ToString();
-            fearBox.Text = emotionResult[currentFace].Scores.Fear.ToString();
-            happinessBox.Text = emotionResult[currentFace].Scores.Happiness.ToString();
-            neutralBox.Text = emotionResult[currentFace].Scores.Neutral.ToString();
-            sadnessBox.Text = emotionResult[currentFace].Scores.Sadness.ToString();
-            surpriseBox.Text = emotionResult[currentFace].Scores.Surprise.ToString();
+            // then, the affective stuff
+            angerBox.Text = emotionResult[currentFace].Scores.Anger.ToString("F3");
+            contemptBox.Text = emotionResult[currentFace].Scores.Contempt.ToString("F3");
+            disgustBox.Text = emotionResult[currentFace].Scores.Disgust.ToString("F3");
+            fearBox.Text = emotionResult[currentFace].Scores.Fear.ToString("F3");
+            happinessBox.Text = emotionResult[currentFace].Scores.Happiness.ToString("F3");
+            neutralBox.Text = emotionResult[currentFace].Scores.Neutral.ToString("F3");
+            sadnessBox.Text = emotionResult[currentFace].Scores.Sadness.ToString("F3");
+            surpriseBox.Text = emotionResult[currentFace].Scores.Surprise.ToString("F3");
 
             //last, update counter
             faceNumBox.Text = currentFace.ToString();
         }
 
-
+        // method to step through multiple faces in image
         public async void incrementFace_Click(object sender, RoutedEventArgs e)
         {
             if (numFaces <= 1) // only one face
@@ -328,12 +301,7 @@ namespace IoT_Face_Reader
             }
         }
 
-
-        /// <summary>
-        /// Callback function for any failures in MediaCapture operations
-        /// </summary>
-        /// <param name="currentCaptureObject"></param>
-        /// <param name="currentFailure"></param>
+        // webcam error handling
         private async void mediaCapture_Failed(MediaCapture currentCaptureObject, MediaCaptureFailedEventArgs currentFailure)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
@@ -361,8 +329,31 @@ namespace IoT_Face_Reader
             });
         }
 
+        // cleanup methods
+        private async void Cleanup()
+        {
+            if (mediaCapture != null)
+            {
+                // Cleanup MediaCapture object
+                if (isPreviewing)
+                {
+                    await mediaCapture.StopPreviewAsync();
+                    captureImage.Source = null;
+                    isPreviewing = false;
+                }
+                mediaCapture.Dispose();
+                mediaCapture = null;
+            }
+            SetInitButtonVisibility(Action.ENABLE);
+        }
+
+        //cleanup methods
+        private void cleanup_Click(object sender, RoutedEventArgs e)
+        {
+            SetInitButtonVisibility(Action.DISABLE);
+            Cleanup();
+        }
 
 
-        
     }
 }
